@@ -20,21 +20,49 @@ header {
   justify-content: center;
   flex-wrap: wrap;
 }
-.carta {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
+.carta {
   width: 117px;
   height: 146px;
+  position: relative;
 
   margin-right: 34px;
   margin-bottom: 34px;
+}
+
+.face {
+  width: 100%;
+  height: 100%;
+  background-color: #a7e9af;
   border-radius: 5px;
 
-  background-color: #a7e9af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+
+  backface-visibility: hidden;
+
+  transition: all 0.5s;
+
+  transform-style: preserve-3d;
 }
-.carta-frente {
+.back-face {
+  transform: rotateY(180deg);
+}
+
+.girarFront {
+  transform: rotateY(-180deg);
+}
+.girarBack {
+  transform: rotateY(0deg);
+}
+
+.imgFront {
+  width: 100px;
+  height: 100px;
+}
+.imgBack {
   width: 100px;
   height: 100px;
 }

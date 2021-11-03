@@ -17,17 +17,13 @@
   <body>
     <header>PARROT CARD GAME</header>
     <div class="container">
-      <div class="carta">
-        <img class="carta-frente" src="./assets/front.png" alt="" />
-      </div>
-      <div class="carta">
-        <img class="carta-frente" src="./assets/front.png" alt="" />
-      </div>
-      <div class="carta">
-        <img class="carta-frente" src="./assets/front.png" alt="" />
-      </div>
-      <div class="carta">
-        <img class="carta-frente" src="./assets/front.png" alt="" />
+      <div class="carta" onclick="girarCarta()">
+        <div class="front-face face">
+          <img class="imgFront" src="./assets/front.png" alt="" />
+        </div>
+        <div class="back-face face">
+          <img class="imgBack" src="./assets/bobrossparrot.gif" alt="" />
+        </div>
       </div>
     </div>
     <script src="script.js"></script>
