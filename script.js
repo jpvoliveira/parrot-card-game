@@ -1,5 +1,10 @@
 let numeroCartas = prompt('Digite o numero de cartas: ')
-let HTMLTemporario
+let cont = 1
+let clique1 = 0
+let clique2 = 0
+let contJogadas = 0
+let cartasViradas = []
+
 while (numeroCartas < 4 || numeroCartas > 14 || numeroCartas % 2 != 0) {
   numeroCartas = prompt('Digite o numero de cartas: ')
 }
@@ -23,12 +28,6 @@ for (let i = 0; i < numeroCartas; i++) {
   containerCartas.innerHTML = carta + containerCartas.innerHTML
 }
 
-let cont = 1
-let clique1 = 0
-let clique2 = 0
-let contJogadas = 0
-let cartasViradas = []
-
 function girarCarta(botao) {
   /* const girarFront = botao.querySelector('.front-face') */
   const girarBack = botao.querySelector('.back-face')
@@ -44,22 +43,28 @@ function girarCarta(botao) {
       clique1.classList.add('girarBack')
       clique2.classList.add('girarBack')
     } else {
-      clique1.classList.remove('girarBack')
-      clique2.classList.remove('girarBack')
+      console.log(clique1)
+      setTimeout(desviraCarta, 1000)
     }
-    clique1 = 0
-    clique2 = 0
-    cont = 1
   }
 
   contJogadas++
   cartasViradas = document.querySelectorAll('.girarBack')
 
   if (cartasViradas.length == numeroCartas) {
-    alert(`Você ganhou em ${contJogadas / 2} jogadas!`)
+    setTimeout('alert(`Você ganhou em ${contJogadas / 2} jogadas!`)', 300)
   }
 }
 
 function comparador() {
   return Math.random() - 0.5
+}
+
+function desviraCarta() {
+  console.log(clique1)
+  clique1.classList.remove('girarBack')
+  clique2.classList.remove('girarBack')
+  clique1 = 0
+  clique2 = 0
+  cont = 1
 }
