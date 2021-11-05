@@ -26,6 +26,8 @@ for (let i = 0; i < numeroCartas; i++) {
 let cont = 1
 let clique1 = 0
 let clique2 = 0
+let contJogadas = 0
+let cartasViradas = []
 
 function girarCarta(botao) {
   /* const girarFront = botao.querySelector('.front-face') */
@@ -39,10 +41,8 @@ function girarCarta(botao) {
   } else if (cont === 2) {
     clique2 = botao.querySelector('.back-face')
     if (clique1.innerHTML === clique2.innerHTML) {
-      console.log(clique1)
       clique1.classList.add('girarBack')
       clique2.classList.add('girarBack')
-      console.log('teste')
     } else {
       clique1.classList.remove('girarBack')
       clique2.classList.remove('girarBack')
@@ -50,6 +50,13 @@ function girarCarta(botao) {
     clique1 = 0
     clique2 = 0
     cont = 1
+  }
+
+  contJogadas++
+  cartasViradas = document.querySelectorAll('.girarBack')
+
+  if (cartasViradas.length == numeroCartas) {
+    alert(`Você ganhou em ${contJogadas / 2} jogadas!`)
   }
 }
 
