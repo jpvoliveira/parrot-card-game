@@ -2,6 +2,8 @@ let numeroCartas = prompt('Digite o numero de cartas: ')
 let cont = 1
 let clique1 = 0
 let clique2 = 0
+let clique1f = 0
+let clique2f = 0
 let contJogadas = 0
 let cartasViradas = []
 
@@ -17,7 +19,7 @@ arrayPar.sort(comparador)
 
 for (let i = 0; i < numeroCartas; i++) {
   let containerCartas = document.querySelector('.container')
-  const carta = `<div class="carta" data-identifier="card" onclick="girarCarta(this)">
+  const carta = `<div class="card" data-identifier="card" onclick="girarCarta(this)">
   <div class="front-face face"  >
     <img class="imgFront" data-identifier="front-face" src="./assets/front.png" alt="" />
   </div>
@@ -29,19 +31,23 @@ for (let i = 0; i < numeroCartas; i++) {
 }
 
 function girarCarta(botao) {
-  /* const girarFront = botao.querySelector('.front-face') */
   const girarBack = botao.querySelector('.back-face')
-  /* girarFront.classList.add('girarBack') */
+  const girarBack2 = botao.querySelector('.front-face')
   girarBack.classList.add('girarBack')
+  girarBack2.classList.add('girarFront')
 
   if (cont === 1) {
     clique1 = botao.querySelector('.back-face')
+    clique1f = botao.querySelector('.front-face')
     cont++
   } else if (cont === 2) {
     clique2 = botao.querySelector('.back-face')
+    clique2f = botao.querySelector('.front-face')
     if (clique1.innerHTML === clique2.innerHTML) {
       clique1.classList.add('girarBack')
+      clique1f.classList.add('girarFront')
       clique2.classList.add('girarBack')
+      clique2f.classList.add('girarFront')
       contJogadas++
     } else {
       setTimeout(desviraCarta, 500)
@@ -63,11 +69,15 @@ function comparador() {
 
 function desviraCarta() {
   clique1.classList.remove('girarBack')
+  clique1f.classList.remove('girarFront')
   clique2.classList.remove('girarBack')
+  clique2f.classList.remove('girarFront')
 }
 
 function zerarCliques() {
+  cont = 1
   clique1 = 0
   clique2 = 0
-  cont = 1
+  clique1f = 0
+  clique2f = 0
 }

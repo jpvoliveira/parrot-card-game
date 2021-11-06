@@ -21,7 +21,7 @@ header {
   flex-wrap: wrap;
 }
 
-.carta {
+.card {
   width: 117px;
   height: 146px;
   position: relative;
@@ -45,9 +45,17 @@ header {
   transition: all 0.5s;
   transform-style: preserve-3d;
 }
+
 .back-face {
-  /* transform: rotateY(0deg); */
   transform: rotateY(180deg);
+}
+
+.card-selected .back-face {
+  transform: rotateY(0deg);
+}
+
+.card-selected .front-face {
+  transform: rotateY(-180deg);
 }
 
 .girarFront {
