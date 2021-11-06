@@ -43,16 +43,15 @@ function girarCarta(botao) {
       clique1.classList.add('girarBack')
       clique2.classList.add('girarBack')
     } else {
-      console.log(clique1)
-      setTimeout(desviraCarta, 1000)
+      setTimeout(desviraCarta, 500)
     }
+    setTimeout(zerarCliques, 500)
   }
 
-  contJogadas++
   cartasViradas = document.querySelectorAll('.girarBack')
 
   if (cartasViradas.length == numeroCartas) {
-    setTimeout('alert(`Você ganhou em ${contJogadas / 2} jogadas!`)', 300)
+    setTimeout('alert(`Você ganhou em ${contJogadas} jogadas!`)', 500)
   }
 }
 
@@ -61,10 +60,13 @@ function comparador() {
 }
 
 function desviraCarta() {
-  console.log(clique1)
   clique1.classList.remove('girarBack')
   clique2.classList.remove('girarBack')
+}
+
+function zerarCliques() {
   clique1 = 0
   clique2 = 0
   cont = 1
+  contJogadas++
 }
