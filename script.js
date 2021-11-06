@@ -17,11 +17,11 @@ arrayPar.sort(comparador)
 
 for (let i = 0; i < numeroCartas; i++) {
   let containerCartas = document.querySelector('.container')
-  const carta = `<div class="carta" onclick="girarCarta(this)">
+  const carta = `<div class="carta" data-identifier="card" onclick="girarCarta(this)">
   <div class="front-face face"  >
-    <img class="imgFront" src="./assets/front.png" alt="" />
+    <img class="imgFront" data-identifier="front-face" src="./assets/front.png" alt="" />
   </div>
-  <div class="back-face face"  >
+  <div class="back-face face" data-identifier="back-face" >
     <img class="imgBack" src="./assets/${arrayPar[i]}.gif" alt="" />
   </div>
 </div>`
@@ -42,8 +42,10 @@ function girarCarta(botao) {
     if (clique1.innerHTML === clique2.innerHTML) {
       clique1.classList.add('girarBack')
       clique2.classList.add('girarBack')
+      contJogadas++
     } else {
       setTimeout(desviraCarta, 500)
+      contJogadas++
     }
     setTimeout(zerarCliques, 500)
   }
@@ -68,5 +70,4 @@ function zerarCliques() {
   clique1 = 0
   clique2 = 0
   cont = 1
-  contJogadas++
 }
