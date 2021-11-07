@@ -7,6 +7,7 @@ let clique2f = 0
 let contJogadas = 0
 let cartasViradas = []
 let contTimer = 0
+let contErro = 0
 
 while (numeroCartas < 4 || numeroCartas > 14 || numeroCartas % 2 != 0) {
   numeroCartas = prompt('Digite o numero de cartas: ')
@@ -30,6 +31,8 @@ for (let i = 0; i < numeroCartas; i++) {
 </div>`
   containerCartas.innerHTML = carta + containerCartas.innerHTML
 }
+
+let intervaloTimer = setInterval(timer, 1000)
 
 function girarCarta(botao) {
   const girarBack = botao.querySelector('.back-face')
@@ -84,17 +87,25 @@ function reiniciar() {
 
   if (cartasViradas.length == numeroCartas) {
     alert(
-      `Você ganhou em ${contJogadas} jogadas, com o tempo de ${
+      `Você ganhou com ${contJogadas} jogadas e tempo de ${
         contTimer - 1
       } segundos!`
     )
-    let reiniciarJogo = prompt('Voce deseja reiniciar o jogo (Sim ou Nao): ')
-    if (reiniciarJogo === 'Sim') {
-      numeroCartas = 0
-      location.reload(true)
-    } else {
-      numeroCartas = 0
-      /* clearInterval(break_increment) */
+
+    while (contErro === 0) {
+      let reiniciarJogo = prompt('Voce deseja reiniciar o jogo (Sim ou Nao): ')
+      if (reiniciarJogo === 'Sim') {
+        numeroCartas = 0
+        contErro++
+        location.reload(true)
+      } else if (reiniciarJogo === 'Nao') {
+        numeroCartas = 0
+        contErro++
+        let tempo = document.querySelector('.timer')
+        tempo.classList.add('displaynone')
+      } else {
+        alert("Digite corretamente -> 'Sim' ou 'Nao'.")
+      }
     }
   }
 }
@@ -103,5 +114,3 @@ function timer() {
   let tempoInicial = document.querySelector('.timer')
   tempoInicial.innerHTML = contTimer++
 }
-
-let intervaloTimer = setInterval(timer, 1000)
