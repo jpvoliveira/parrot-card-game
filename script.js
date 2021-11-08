@@ -14,19 +14,22 @@ while (numeroCartas < 4 || numeroCartas > 14 || numeroCartas % 2 != 0) {
   numeroCartas = prompt('Digite o numero de cartas: ')
 }
 
-const arrayGif = ['gif1', 'gif2', 'gif3', 'gif4', 'gif5', 'gif6', 'gif7']
-let arrayPar = arrayGif.slice(0, numeroCartas / 2)
+let arrayGif = ['gif1', 'gif2', 'gif3', 'gif4', 'gif5', 'gif6', 'gif7']
 
+arrayGif.sort(comparador)
+
+let arrayPar = arrayGif.slice(0, numeroCartas / 2)
 arrayPar = arrayPar.concat(arrayPar)
+
 arrayPar.sort(comparador)
 
 for (let i = 0; i < numeroCartas; i++) {
   let containerCartas = document.querySelector('.container')
   const carta = `<div class="card" data-identifier="card" onclick="girarCarta(this)">
   <div class="front-face face"  >
-    <img class="imgFront" data-identifier="front-face" src="./assets/front.png" alt="" />
+    <img class="imgFront" data-identifier="back-face" src="./assets/front.png" alt="" />
   </div>
-  <div class="back-face face" data-identifier="back-face" >
+  <div class="back-face face" data-identifier="front-face" >
     <img class="imgBack" src="./assets/${arrayPar[i]}.gif" alt="" />
   </div>
 </div>`
