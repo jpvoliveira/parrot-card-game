@@ -8,6 +8,7 @@ let contJogadas = 0
 let cartasViradas = []
 let contTimer = 0
 let contErro = 0
+let cartasVirando = false
 
 while (numeroCartas < 4 || numeroCartas > 14 || numeroCartas % 2 != 0) {
   numeroCartas = prompt('Digite o numero de cartas: ')
@@ -35,6 +36,10 @@ for (let i = 0; i < numeroCartas; i++) {
 let intervaloTimer = setInterval(timer, 1000)
 
 function girarCarta(botao) {
+  if (cartasVirando === true) {
+    return
+  }
+
   const girarBack = botao.querySelector('.back-face')
   const girarBack2 = botao.querySelector('.front-face')
   girarBack.classList.add('girarBack')
@@ -43,8 +48,10 @@ function girarCarta(botao) {
   if (cont === 1) {
     clique1 = botao.querySelector('.back-face')
     clique1f = botao.querySelector('.front-face')
+    botao.classList.add('pointer')
     cont++
   } else if (cont === 2) {
+    clique1.parentNode.classList.remove('pointer')
     clique2 = botao.querySelector('.back-face')
     clique2f = botao.querySelector('.front-face')
 
@@ -53,14 +60,20 @@ function girarCarta(botao) {
       clique1f.classList.add('girarFront')
       clique2.classList.add('girarBack')
       clique2f.classList.add('girarFront')
+
+      clique1.parentNode.classList.add('pointer')
+      clique2.parentNode.classList.add('pointer')
+
+      cartasVirando = true
       contJogadas++
     } else {
-      setTimeout(desviraCarta, 500)
+      cartasVirando = true
+      setTimeout(desviraCarta, 1000)
       contJogadas++
     }
-    setTimeout(zerarCliques, 500)
+    setTimeout(zerarCliques, 1000)
   }
-  setTimeout(reiniciar, 500)
+  setTimeout(reiniciar, 1000)
 }
 
 function comparador() {
@@ -72,6 +85,7 @@ function desviraCarta() {
   clique1f.classList.remove('girarFront')
   clique2.classList.remove('girarBack')
   clique2f.classList.remove('girarFront')
+  cartasVirando = false
 }
 
 function zerarCliques() {
@@ -80,6 +94,7 @@ function zerarCliques() {
   clique2 = 0
   clique1f = 0
   clique2f = 0
+  cartasVirando = false
 }
 
 function reiniciar() {
@@ -87,7 +102,7 @@ function reiniciar() {
 
   if (cartasViradas.length == numeroCartas) {
     alert(
-      `Você ganhou com ${contJogadas} jogadas e tempo de ${
+      `Você ganhou com ${contJogadas * 2} jogadas e tempo de ${
         contTimer - 1
       } segundos!`
     )
